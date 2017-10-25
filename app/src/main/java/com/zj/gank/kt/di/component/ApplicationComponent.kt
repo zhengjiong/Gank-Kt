@@ -1,6 +1,7 @@
 package com.zj.gank.kt.di.component
 
 import com.zj.gank.kt.di.module.ApiModule
+import com.zj.gank.kt.di.module.ApplicationModule
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,7 +12,9 @@ import javax.inject.Singleton
  */
 
 @Singleton
-@Component(modules = arrayOf(ApiModule::class))
+@Component(modules = arrayOf(ApiModule::class, ApplicationModule::class))
 interface ApplicationComponent {
-    fun inject()
+    //fun inject(fragment)
+
+    fun plus(): ArticleComponent
 }

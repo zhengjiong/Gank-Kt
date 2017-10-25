@@ -1,5 +1,6 @@
 package com.zj.gank.kt.di.component
 
+import com.zj.gank.kt.ui.android.AndroidArticleFragment
 import dagger.Subcomponent
 
 /**
@@ -10,5 +11,5 @@ import dagger.Subcomponent
 
 @Subcomponent
 interface ArticleComponent {
-    fun inject()
+    fun inject(fragment: AndroidArticleFragment)
 }

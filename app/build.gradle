@@ -37,18 +37,34 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation "android.arch.lifecycle:runtime:1.0.0-beta1"
+    implementation "android.arch.lifecycle:extensions:1.0.0-beta1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-beta1"
+
+    /*dagger2*/
     implementation 'com.google.dagger:dagger:2.12'
     kapt 'com.google.dagger:dagger-compiler:2.12'
     implementation 'org.glassfish:javax.annotation:10.0-b28'
+
+    /*RxJava2*/
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     // Because RxAndroid releases are few and far between, it is recommended you also
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     implementation 'io.reactivex.rxjava2:rxjava:2.1.5'
+
+
+
+
     /*squareup*/
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+
+
+
     implementation 'com.google.code.gson:gson:2.8.1'
     implementation 'com.github.bumptech.glide:glide:4.0.0'
     //RecyclerViewBaseAdapter
