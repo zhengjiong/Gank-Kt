@@ -15,11 +15,7 @@ interface BaseMVPContract {
 
     interface Presenter<V : BaseMVPContract.View> {
 
-        val stateBundle: Bundle
-
-        val view: V
-
-        val isViewAttached: Boolean
+        fun getStateBundle(): Bundle
 
         fun attachLifecycle(lifecycle: Lifecycle)
 
@@ -28,6 +24,10 @@ interface BaseMVPContract {
         fun attachView(view: V)
 
         fun detachView()
+
+        fun getView(): V?
+
+        fun isViewAttached(): Boolean
 
         fun onPresenterCreate()
 
