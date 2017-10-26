@@ -16,12 +16,26 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        flavorDimensions versionName
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    productFlavors {
+        tencent {
+            dimension "1.0"
+            //applicationIdSuffix dimension
+        }
+        official {
+            dimension "1.0"
+            //applicationIdSuffix dimension
+        }
+
     }
 }
 

@@ -11,6 +11,6 @@ import com.zj.gank.kt.base.mvp.BaseMVPContract
 interface BaseContract {
     interface View : BaseMVPContract.View
 
-    interface Presenter:BaseMVPContract.Presenter<BaseMVPContract.View>
+    interface Presenter<V : BaseMVPContract.View> : BaseMVPContract.Presenter<V>
 }
 

@@ -12,9 +12,7 @@ class BaseViewModel<V : BaseMVPContract.View, P : BaseMVPContract.Presenter<V>> 
     private var presenter: P? = null
 
     internal fun setPresenter(presenter: P) {
-        if (this.presenter == null) {
-            this.presenter = presenter
-        }
+        this.presenter = this.presenter ?: presenter
     }
 
     fun getPresenter() = presenter

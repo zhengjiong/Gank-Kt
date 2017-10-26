@@ -1,5 +1,6 @@
 package com.zj.gank.kt.di.component
 
+import com.zj.gank.kt.di.scope.PerActivity
 import com.zj.gank.kt.ui.android.AndroidArticleFragment
 import dagger.Subcomponent
 
