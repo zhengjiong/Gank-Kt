@@ -11,9 +11,7 @@ import android.os.Bundle
 abstract class BaseMVPPresenter<V : BaseMVPContract.View> : LifecycleObserver, BaseMVPContract.Presenter<V> {
     private var stateBundle: Bundle? = null
     private var view: V? = null
-    /*override fun getView(): V {
-        return view
-    }*/
+
 
     override fun getView(): V? = view
 

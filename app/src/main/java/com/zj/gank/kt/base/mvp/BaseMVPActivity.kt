@@ -25,16 +25,16 @@ abstract class BaseMVPActivity<V : BaseMVPContract.View, P : BaseMVPContract.Pre
         }
 
         presenter = viewModel.getPresenter()
-        presenter?.attachLifecycle(lifecycle)
-        presenter?.attachView(this as V)
+        presenter!!.attachLifecycle(lifecycle)
+        presenter!!.attachView(this as V)
         if (isPresenterCreated) {
             presenter?.onPresenterCreate()
         }
     }
 
     override fun onDestroy() {
-        presenter?.detachLifecycle(lifecycle)
-        presenter?.detachView()
+        presenter!!.detachLifecycle(lifecycle)
+        presenter!!.detachView()
         super.onDestroy()
     }
 }
