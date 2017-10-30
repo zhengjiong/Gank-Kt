@@ -11,6 +11,6 @@ import dagger.Subcomponent
  */
 
 @Subcomponent
-interface ArticleComponent {
+interface ActivityComponent {
     fun inject(fragment: AndroidArticleFragment)
 }

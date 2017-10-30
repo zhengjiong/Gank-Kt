@@ -16,5 +16,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
     //fun inject(fragment)
 
-    fun plus(): ArticleComponent
+    fun plus(): ActivityComponent
 }

@@ -6,6 +6,7 @@ import android.support.annotation.CallSuper
 import android.support.v7.app.AlertDialog
 import com.zj.gank.kt.App
 import com.zj.gank.kt.base.mvp.BaseMVPActivity
+import com.zj.gank.kt.di.component.ActivityComponent
 
 /**
  *
@@ -15,6 +16,10 @@ import com.zj.gank.kt.base.mvp.BaseMVPActivity
 
 
 abstract class BaseActivity<V : BaseContract.View, P : BaseContract.Presenter<V>> : BaseMVPActivity<V, P>() {
+
+    val activityComponent : ActivityComponent by lazy(LazyThreadSafetyMode.NONE){
+        getAppComponent().plus()
+    }
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
