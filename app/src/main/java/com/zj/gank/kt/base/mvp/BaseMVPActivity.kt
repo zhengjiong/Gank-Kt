@@ -11,16 +11,17 @@ import android.support.v7.app.AppCompatActivity
 abstract class BaseMVPActivity<V : BaseMVPContract.View, P : BaseMVPContract.Presenter<V>> : AppCompatActivity(), BaseMVPContract.View {
     var presenter: P? = null
 
-    abstract fun initPresenter(): P
+    abstract fun initPresenter(): P?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this).get(BaseViewModel::class.java) as BaseViewModel<V, P>//todo
+        val viewModel = ViewModelProviders.of(this).get(BaseViewModel::class.java) as BaseViewModel<V, P>
 
         var isPresenterCreated = false
         if (viewModel.getPresenter() == null) {
-            viewModel.setPresenter(initPresenter())
+            val p = initPresenter() ?: return
+            viewModel.setPresenter(p)
             isPresenterCreated = true
         }
 
@@ -33,8 +34,8 @@ abstract class BaseMVPActivity<V : BaseMVPContract.View, P : BaseMVPContract.Pre
     }
 
     override fun onDestroy() {
-        presenter!!.detachLifecycle(lifecycle)
-        presenter!!.detachView()
+        presenter?.detachLifecycle(lifecycle)
+        presenter?.detachView()
         super.onDestroy()
     }
 }

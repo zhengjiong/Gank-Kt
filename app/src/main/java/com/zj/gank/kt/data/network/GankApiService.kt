@@ -13,7 +13,7 @@ import retrofit2.http.Path
  */
 interface GankApiService {
 
-    @GET("data/Android/10{page}")
+    @GET("data/Android/10/{page}")
     fun getAndroidData(@Path("page") page: Int): Observable<JsonResult<List<Article>>>
 
     @GET("data/福利/10/{page}")

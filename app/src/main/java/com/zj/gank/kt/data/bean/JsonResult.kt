@@ -6,4 +6,4 @@ package com.zj.gank.kt.data.bean
  * @author zhengjiong
  */
 
-class JsonResult<T>(val error: Boolean, val result: T)
+class JsonResult<T>(val error: Boolean, val results: T)

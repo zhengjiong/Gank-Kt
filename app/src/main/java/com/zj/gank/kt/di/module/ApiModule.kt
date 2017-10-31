@@ -1,5 +1,6 @@
 package com.zj.gank.kt.di.module
 
+import android.util.Log
 import com.zj.gank.kt.BuildConfig
 import com.zj.gank.kt.data.network.ApiConstants
 import com.zj.gank.kt.data.network.GankApiService
@@ -8,6 +9,8 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -27,11 +30,21 @@ class ApiModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpBuilder(): OkHttpClient.Builder {
+    fun provideInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+            override fun log(message: String?) {
+                Log.e("RetrofitLog", "retrofitBack ======================= " + message);
+            }
+
+        })
+    }
+
+    @Singleton
+    @Provides
+    fun provideOkHttpBuilder(logging: HttpLoggingInterceptor): OkHttpClient.Builder {
         val okhttpBuilder = OkHttpClient.Builder()
         if (BuildConfig.DEBUG) {
-            val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.BODY
             okhttpBuilder.addInterceptor(logging)
         }
 
@@ -43,12 +56,13 @@ class ApiModule {
     @Named("gankRetrofit")
     @Singleton
     @Provides
-    fun provideGankRetrofit(retrofitBuilder: Retrofit.Builder,
-                            okHttpClientBuilder: OkHttpClient.Builder,
+    fun provideGankRetrofit(okHttpClientBuilder: OkHttpClient.Builder,
                             @Named("gank") baseUrl: String): Retrofit {
         //val client = okHttpClientBuilder.addInterceptor().build()
-        return retrofitBuilder
+        return Retrofit.Builder()
                 .client(okHttpClientBuilder.build())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
                 .build()
     }

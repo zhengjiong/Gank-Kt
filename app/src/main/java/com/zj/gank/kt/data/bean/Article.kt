@@ -6,7 +6,7 @@ package com.zj.gank.kt.data.bean
  * @author zhengjiong
  */
 
-data class Article(
+class Article(
         val _id: String,
         val createdAt: String,
         val desc: String,
