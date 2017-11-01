@@ -3,6 +3,7 @@ package com.zj.gank.kt
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import com.blankj.utilcode.util.Utils
 import com.zj.gank.kt.di.component.ApplicationComponent
 import com.zj.gank.kt.di.component.DaggerApplicationComponent
 
@@ -27,6 +28,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        Utils.init(this)
     }
 
     override fun attachBaseContext(base: Context?) {
