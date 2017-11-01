@@ -20,20 +20,17 @@ import javax.inject.Inject
 
 class AndroidArticlePresenter @Inject constructor(val model: ArticleModle) : ApiPresenter<AndroidArticleContract.View>(), AndroidArticleContract.Presenter {
 
-    @OnLifecycleEvent(value = Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(value = Lifecycle.Event.ON_CREATE)
     fun refresh() {
         disposable.add(model.getAndroidArticle(0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Consumer<JsonResult<List<Article>>> {
-                    override fun accept(it: JsonResult<List<Article>>?) {
-                        if (!it!!.error) {
-                            getView()?.onDataReceive(it.results)
-                        } else {
-                            getView()?.showError("加载失败")
-                        }
+                .subscribe(Consumer<JsonResult<List<Article>>> { it ->
+                    if (!it!!.error) {
+                        getView()?.onRefreshReceive(it.results)
+                    } else {
+                        getView()?.showError("加载失败")
                     }
-
                 }, object : Consumer<Throwable> {
                     override fun accept(t: Throwable?) {
                         getView()?.showError(t?.message)

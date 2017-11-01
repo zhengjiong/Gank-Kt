@@ -12,7 +12,8 @@ import com.zj.gank.kt.ui.api.ApiContract
 interface AndroidArticleContract {
 
     interface View : ApiContract.View {
-        fun onDataReceive(list: List<Article>)
+        fun onRefreshReceive(list: List<Article>)
+        fun onLoadMoreReceive(list: List<Article>)
         fun showNoData()
     }
 
